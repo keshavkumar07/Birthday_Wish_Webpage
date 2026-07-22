@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Muskan Ji! 🎂✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/index.css" />
+  <!-- Confetti Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Floating Background Particles -->
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <main class="main-wrapper">
+    <!-- Header Badge -->
+    <div class="date-badge">🎉 July 30 • Special Celebration</div>
+
+    <!-- Title Header -->
+    <header class="header-section">
+      <h1 class="sparkle-title">Happy Birthday!</h1>
+      <h2 class="sister-name">Muskan Ji</h2>
+      <p class="pet-name">✨ Dearest "Sushmita Devi" ✨</p>
+    </header>
+
+    <!-- Interactive Birthday Cake -->
+    <div class="cake-wrapper">
+      <div class="cake-container" id="cakeContainer" title="Tap to blow out candle & play music!">
+        <div class="candle">
+          <div class="flame" id="flame"></div>
+        </div>
+        <div class="cake-top"></div>
+        <div class="cake-middle"></div>
+        <div class="cake-bottom"></div>
+      </div>
+      <p class="cake-prompt" id="cakePrompt">Tap the flame or blow into your mic to make a wish! 🕯️✨</p>
+    </div>
+
+    <!-- Letter Section -->
+    <section class="letter-box">
+      <h3 class="letter-heading">Dear Muskan Ji 🌸,</h3>
+      <p class="letter-body">
+        Happy Birthday to the sweetest younger sister in the world! On your special day, <strong>July 30th</strong>, I want you to know how much laughter and joy you bring to our family.
+      </p>
+      <p class="letter-body">
+        May your smile always stay bright, and may every dream you hold come true this year!
+      </p>
+      <div class="letter-signature">
+        <span>Always here for you,</span>
+        <strong>Your Lovely Brother, Keshav Kumar (Nanku Ji) 👦🏻✨</strong>
+      </div>
+    </section>
+
+    <!-- Interactive Surprises / Gift Cards -->
+    <section class="gifts-section">
+      <h3>Tap a Gift to Open Your Wishes! 🎁</h3>
+      <div class="gifts-grid">
+        <div class="gift-card" onclick="flipCard(this)">
+          <div class="gift-inner">
+            <div class="gift-front">🎁 Gift #1</div>
+            <div class="gift-back">🌟 Endless Joy & Health!</div>
+          </div>
+        </div>
+        <div class="gift-card" onclick="flipCard(this)">
+          <div class="gift-inner">
+            <div class="gift-front">🎁 Gift #2</div>
+            <div class="gift-back">👑 Big Brother's Lifetime Protection!</div>
+          </div>
+        </div>
+        <div class="gift-card" onclick="flipCard(this)">
+          <div class="gift-inner">
+            <div class="gift-front">🎁 Gift #3</div>
+            <div class="gift-back">🎓 Success in All Your Dreams!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <button class="btn btn-celebrate" id="celebrateBtn">Shower Confetti 🎊</button>
+      <button class="btn btn-tune" id="soundBtn">Play Chimes 🎵</button>
+    </div>
+  </main>
+
+  <script src="src/js/index.js"></script>
+</body>
+</html>
