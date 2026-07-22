@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Web Audio Synthesizer Engine
   let audioCtx = null;
+  let activeOscillators = []; // Tracks currently playing notes to prevent overlapping
 
   function initAudio() {
     if (!audioCtx) {
@@ -15,14 +16,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Plays a full ~10-second "Happy Birthday" melody
+  // Stops any currently playing audio so music never overlaps or becomes noisy
+  function stopCurrentAudio() {
+    activeOscillators.forEach(osc => {
+      try {
+        osc.stop();
+        osc.disconnect();
+      } catch (e) {
+        // Oscillator already stopped
+      }
+    });
+    activeOscillators = [];
+  }
+
+  // Plays a clean, non-overlapping 10-second "Happy Birthday" melody
   function playFull10SecMelody() {
     initAudio();
     if (audioCtx.state === "suspended") {
       audioCtx.resume();
     }
 
-    // Note frequencies (Hz) & relative timing
+    // Stop previous music if any button was pressed again
+    stopCurrentAudio();
+
+    // Note frequencies (Hz) & relative duration
     const melody = [
       { note: 261.63, duration: 0.35 }, // Hap-
       { note: 261.63, duration: 0.25 }, // py
@@ -64,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       osc.frequency.setValueAtTime(item.note, currentTime);
 
       // Smooth sound fade
-      gain.gain.setValueAtTime(0.35, currentTime);
+      gain.gain.setValueAtTime(0.3, currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, currentTime + item.duration - 0.05);
 
       osc.connect(gain);
@@ -72,6 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       osc.start(currentTime);
       osc.stop(currentTime + item.duration);
+
+      // Save oscillator reference to allow cancelling if another button is pressed
+      activeOscillators.push(osc);
 
       currentTime += item.duration;
     });
@@ -88,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cakePrompt.textContent = "Your wish is registered! Happy Birthday Muskan Ji! ✨";
       cakePrompt.style.color = "#ffa502";
       
-      // Play full 10 second birthday music & launch confetti
       playFull10SecMelody();
       launchConfetti();
       isBlown = true;
@@ -132,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
     }).catch(() => {
-      // Tap interaction remains active if mic permissions are declined
+      // Tap interaction handles it if mic permission is denied
     });
   }
 
@@ -154,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Floating Background Emoji Particle Generator
+  // Floating Particles Engine
   const emojis = ["🎈", "🌸", "✨", "💖", "🎉", "⭐"];
   function spawnParticle() {
     const particle = document.createElement("div");
